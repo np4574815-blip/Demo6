@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Nebula Dominator</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+:root{
+  --neon:#00f7ff;
+  --violet:#8f00ff;
+  --dark:#060611;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+
+body{
+  background:var(--dark);
+  color:white;
+  font-family:Segoe UI,system-ui;
+  overflow-x:hidden;
+}
+
+/* ===== DEEP MOVING BACKGROUND ===== */
+body::before{
+  content:"";
+  position:fixed; inset:-20%;
+  background:
+    radial-gradient(circle at 20% 20%, #00f7ff33, transparent 45%),
+    radial-gradient(circle at 80% 70%, #8f00ff33, transparent 45%),
+    radial-gradient(circle at 50% 50%, #ffffff08, transparent 60%);
+  animation:space 30s linear infinite;
+  z-index:-1;
+}
+@keyframes space{
+  from{transform:rotate(0deg)}
+  to{transform:rotate(360deg)}
+}
+
+/* ===== HERO ===== */
+.hero{
+  min-height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  padding:20px;
+}
+.hero h1{
+  font-size:3.4rem;
+  background:linear-gradient(90deg,var(--neon),var(--violet));
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  animation:pulse 2s infinite alternate;
+}
+@keyframes pulse{
+  from{letter-spacing:2px}
+  to{letter-spacing:6px}
+}
+.hero p{opacity:.85;margin:16px 0}
+.hero button{
+  padding:16px 46px;
+  border:none;
+  border-radius:50px;
+  font-weight:900;
+  background:linear-gradient(90deg,var(--neon),var(--violet));
+  cursor:pointer;
+}
+
+/* ===== TRUST BAR ===== */
+.trust{
+  display:flex;
+  justify-content:center;
+  gap:24px;
+  padding:40px 20px;
+  flex-wrap:wrap;
+}
+.trust div{
+  background:rgba(255,255,255,.06);
+  padding:18px 28px;
+  border-radius:18px;
+  font-size:14px;
+}
+
+/* ===== FUNNEL ===== */
+.funnel{
+  padding:80px 20px;
+  text-align:center;
+}
+.funnel h2{margin-bottom:10px}
+.step-wrap{
+  display:flex;
+  gap:22px;
+  flex-wrap:wrap;
+  justify-content:center;
+  margin-top:40px;
+}
+.step{
+  width:260px;
+  padding:30px;
+  border-radius:22px;
+  background:rgba(255,255,255,.06);
+  transition:.4s;
+}
+.step:hover{
+  transform:translateY(-12px) scale(1.05);
+  box-shadow:0 0 40px #00f7ff55;
+}
+
+/* ===== ILLUSION GENERATOR ===== */
+.generator{
+  max-width:900px;
+  margin:80px auto;
+  padding:40px 20px;
+  text-align:center;
+  background:rgba(255,255,255,.05);
+  border-radius:30px;
+}
+.generator select{
+  padding:14px 18px;
+  border-radius:16px;
+  border:none;
+  margin:10px;
+  min-width:220px;
+}
+.preview{
+  margin-top:30px;
+  padding:30px;
+  border-radius:22px;
+  background:linear-gradient(135deg,#0c0c1a,#0c1025);
+  animation:glow 2s infinite alternate;
+}
+@keyframes glow{
+  from{box-shadow:0 0 20px #00f7ff44}
+  to{box-shadow:0 0 40px #8f00ff66}
+}
+
+/* ===== STATS ===== */
+.stats{
+  display:flex;
+  justify-content:center;
+  gap:20px;
+  flex-wrap:wrap;
+  padding:70px 20px;
+}
+.stat{
+  width:220px;
+  padding:30px;
+  text-align:center;
+  border-radius:22px;
+  background:rgba(255,255,255,.06);
+}
+.stat h2{color:var(--neon);font-size:2.6rem}
+
+/* ===== CTA LOCK ===== */
+.lock{
+  text-align:center;
+  padding:90px 20px;
+}
+.lock input{
+  width:260px;
+  padding:14px;
+  border-radius:14px;
+  border:none;
+  margin:16px 0;
+}
+.lock a{
+  display:inline-block;
+  padding:16px 48px;
+  border-radius:40px;
+  background:linear-gradient(90deg,var(--neon),var(--violet));
+  color:black;
+  font-weight:900;
+  text-decoration:none;
+}
+
+/* ===== AI FLOAT MSG ===== */
+#ai{
+  position:fixed;
+  bottom:20px; right:20px;
+  background:rgba(0,0,0,.9);
+  border:1px solid var(--neon);
+  padding:14px 18px;
+  border-radius:16px;
+  color:var(--neon);
+  font-size:14px;
+  opacity:0;
+  transition:.4s;
+}
+
+/* ===== SCREEN HIT ===== */
+@keyframes shake{
+  25%{transform:translate(4px)}
+  50%{transform:translate(-4px)}
+}
+.hit{animation:shake .15s}
+</style>
+</head>
+
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <div>
+    <h1>NEBULA DOMINATOR</h1>
+    <p>Illusion-level websites that convert visitors into clients.</p>
+    <button onclick="scrollToFunnel()">Activate System</button>
+  </div>
+</section>
+
+<!-- TRUST -->
+<section class="trust">
+  <div>⚡ AI-Optimized Design</div>
+  <div>🚀 High Conversion Layouts</div>
+  <div>🔒 Lead Lock Funnel</div>
+</section>
+
+<!-- FUNNEL -->
+<section class="funnel" id="funnel">
+  <h2>💼 How Clients Are Generated</h2>
+  <div class="step-wrap">
+    <div class="step">👁️ Attention Capture<br>Illusion + Motion</div>
+    <div class="step">🧠 Trust Building<br>Stats + Authority</div>
+    <div class="step">📲 Lead Lock<br>WhatsApp Conversion</div>
+  </div>
+</section>
+
+<!-- GENERATOR -->
+<section class="generator">
+  <h2>⚙️ Live Business Generator</h2>
+  <select id="biz">
+    <option>Startup</option>
+    <option>Consultant</option>
+    <option>Agency</option>
+    <option>Gym</option>
+  </select>
+  <select id="style">
+    <option>Neon Dark</option>
+    <option>Cyber Purple</option>
+    <option>Midnight Blue</option>
+  </select>
+  <div class="preview">
+    <strong>Preview Mode:</strong>
+    <p id="pv">Startup • Neon Dark</p>
+  </div>
+</section>
+
+<!-- STATS -->
+<section class="stats">
+  <div class="stat"><h2 id="s1">131</h2><p>Websites Today</p></div>
+  <div class="stat"><h2 id="s2">49</h2><p>Active Clients</p></div>
+  <div class="stat"><h2>98.9%</h2><p>Conversion Rate</p></div>
+</section>
+
+<!-- LOCK -->
+<section class="lock">
+  <h2>🔐 Unlock Your Website</h2>
+  <p>Only 3 deployments available today</p>
+  <input placeholder="WhatsApp Number">
+  <br>
+  <a href="https://wa.me/919305893662?text=I%20want%20Nebula%20Dominator%20Website" target="_blank">
+    UNLOCK NOW
+  </a>
+</section>
+
+<div id="ai">AI: High-intent visitor detected ⚡</div>
+
+<script>
+function scrollToFunnel(){
+  document.getElementById("funnel").scrollIntoView({behavior:"smooth"});
+}
+
+/* Generator */
+const biz=document.getElementById("biz");
+const style=document.getElementById("style");
+const pv=document.getElementById("pv");
+[biz,style].forEach(el=>{
+  el.onchange=()=>pv.innerText=`${biz.value} • ${style.value}`;
+});
+
+/* Auto stats */
+setInterval(()=>{
+  document.getElementById("s1").innerText=130+Math.floor(Math.random()*6);
+},2500);
+
+/* AI message */
+setTimeout(()=>document.getElementById("ai").style.opacity=1,3500);
+
+/* Click illusion */
+document.addEventListener("click",()=>{
+  document.body.classList.add("hit");
+  setTimeout(()=>document.body.classList.remove("hit"),150);
+});
+</script>
+
+</body>
+</html>
